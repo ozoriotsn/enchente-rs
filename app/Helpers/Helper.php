@@ -1525,6 +1525,7 @@ class Helper
     {
 
         $seconds = 3600 * 24;
+        $shelters = [];
 
         cache()->remember('shelters', $seconds, function () {
 
