@@ -128,7 +128,7 @@
 
                         <label for="city">Cidade de Origem</label>
 
-                        <input list="brow" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}">
+                        <input type="text" autocomplete list="city" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}">
 
                         @error('city')
                             <span class="invalid-feedback" role="alert">
@@ -136,7 +136,7 @@
                             </span>
                         @enderror
 
-                        <datalist id="brow">
+                        <datalist id="city">
                             @foreach ($cities as $city)
                                 <option value="{{ $city['name'] }}">{{ $city['name'] }}</option>
                             @endforeach
@@ -148,7 +148,7 @@
 
                         <label for="city">Abrigo <a href="https://sos-rs.com/" target="_blank">(Ref. SOS-RS)</a></label>
 
-                        <input list="shelters" class="form-control @error('shelter') is-invalid @enderror" name="shelter" value="{{ old('shelter') }}">
+                        <input type="text" autocomplete list="shelters" class="form-control @error('shelter') is-invalid @enderror" name="shelter" value="{{ old('shelter') }}">
 
                         @error('shelter')
                             <span class="invalid-feedback" role="alert">
