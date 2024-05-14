@@ -128,7 +128,12 @@
 
                         <label for="city">Cidade de Origem</label>
 
-                        <input type="text" autocomplete list="city" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}">
+                        <select class="form-select @error('city') is-invalid @enderror" aria-label="Default select example" name="city">
+                            <option value="">Selecione</option>
+                            @foreach ($cities as $city)
+                                <option value="{{ $city['name'] }}" {{ old('city') == $city['name'] ? 'selected' : '' }}>{{ $city['name'] }}</option>
+                            @endforeach
+                        </select>
 
                         @error('city')
                             <span class="invalid-feedback" role="alert">
@@ -136,11 +141,7 @@
                             </span>
                         @enderror
 
-                        <datalist id="city">
-                            @foreach ($cities as $city)
-                                <option value="{{ $city['name'] }}">{{ $city['name'] }}</option>
-                            @endforeach
-                        </datalist>
+
 
                     </div>
 

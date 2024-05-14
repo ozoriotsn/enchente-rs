@@ -79,8 +79,15 @@
 
                     <label for="city">Cidade de Origem</label>
 
-                    <input list="brow" class="form-control @error('city') is-invalid @enderror" name="city"
-                        value="{{ old('city') ? old('city') : $person->city }}">
+
+                        <select class="form-select @error('city') is-invalid @enderror" aria-label="Default select example" name="city">
+
+                            @foreach ($cities as $city)
+                                <option value="{{ $city['name'] }}" {{$person->city == $city['name'] ? 'selected' : ''}} >{{ $city['name'] }}</option>
+                            @endforeach
+
+                        </select>
+
 
                     @error('city')
                         <span class="invalid-feedback" role="alert">
@@ -88,11 +95,6 @@
                         </span>
                     @enderror
 
-                    <datalist id="brow">
-                        @foreach ($cities as $city)
-                            <option value="{{ $city['name'] }}">{{ $city['name'] }}</option>
-                        @endforeach
-                    </datalist>
 
                 </div>
 
