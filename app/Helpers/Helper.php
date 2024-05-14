@@ -15,7 +15,7 @@ class Helper
 
 
 
-    public static function getCities() : array
+    public static function getCities(): array
     {
 
 
@@ -1529,24 +1529,24 @@ class Helper
 
         cache()->remember('shelters', $seconds, function () {
 
-        $shelters = Http::get('https://api.sos-rs.com/shelters?orderBy=prioritySum&order=desc&page=1&perPage=100')->json();
+            $getShelters = Http::get('https://api.sos-rs.com/shelters?orderBy=prioritySum&order=desc&page=1&perPage=100')->json();
 
-        $count = $shelters['data']['count'];
-        $perPage = $shelters['data']['perPage'];
+            $count = $getShelters['data']['count'];
+            $perPage = $getShelters['data']['perPage'];
 
-        $calc = $count / $perPage;
-        $pages = ceil($calc);
-        $pages = intval($pages);
+            $calc = $count / $perPage;
+            $pages = ceil($calc);
+            $pages = intval($pages);
 
-        $sheltersArray = [];
-        for ($i = 2; $i <= $pages; $i++) {
-            $getShelter = Http::get('https://api.sos-rs.com/shelters?orderBy=prioritySum&order=desc&page=' . $i . '&perPage=100')->json();
-            $sheltersArray[] = $getShelter['data']['results'];
-        }
+            $sheltersArray = [];
+            for ($i = 2; $i <= $pages; $i++) {
+                $getShelter = Http::get('https://api.sos-rs.com/shelters?orderBy=prioritySum&order=desc&page=' . $i . '&perPage=100')->json();
+                $sheltersArray[] = $getShelter['data']['results'];
+            }
 
-        $sheltersArray = array_merge($shelters['data']['results'],$sheltersArray[0],$sheltersArray[1]);
+            $sheltersArray = array_merge($getShelters['data']['results'], $sheltersArray[0], $sheltersArray[1]);
 
-        Cache::put('shelters', $sheltersArray);
+            return $sheltersArray;
 
         });
 

@@ -19,87 +19,6 @@
     @endif
     @livewireStyles
 
-    <style>
-        .feature-icon {
-            width: 4rem;
-            height: 4rem;
-            border-radius: .75rem;
-        }
-
-        .feature .icon-link {
-            margin: 5px;
-            padding: 5px;
-            border: 1px solid #666;
-            background: #eee;
-            border-radius: 5px;
-            display: inline-block;
-            width: 100%;
-            text-align: left;
-            color: #212529;
-            text-decoration: none;
-            text-align: center;
-            font-size: 14px;
-            text-transform: uppercase;
-            font-weight: bold;
-            letter-spacing: 0.05rem;
-            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-        }
-
-        .icon-square {
-            width: 3rem;
-            height: 3rem;
-            border-radius: .75rem;
-        }
-
-        .text-shadow-1 {
-            text-shadow: 0 .125rem .25rem rgba(0, 0, 0, .25);
-        }
-
-        .text-shadow-2 {
-            text-shadow: 0 .25rem .5rem rgba(0, 0, 0, .25);
-        }
-
-        .text-shadow-3 {
-            text-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .25);
-        }
-
-        .card-cover {
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: cover;
-        }
-
-        .feature-icon-small {
-            width: 3rem;
-            height: 3rem;
-        }
-
-        .feature .feature-text {
-            height: 3em;
-            max-height: 5em;
-        }
-
-        nav a {
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        .mobile-links a {
-
-            text-transform: uppercase;
-        }
-
-        footer {
-            position: fixed;
-            height: 100px;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
-
-
-
-
 </head>
 
 
@@ -182,7 +101,7 @@
 
 
 
-        <div class="container-fluid px-4" style="margin-top: 1em;">
+        <div class="container-fluid px-4" style="margin-top: 1em;" id="wrap">
 
             <div class="row">
                 @yield('content')
@@ -190,7 +109,7 @@
         </div>
 
 
-        <footer class="footer mt-auto py-3 bg-body-tertiary">
+        <footer class="footer  py-3 ">
             <div class="container">
                 <span class="text-body-secondary">copyright @ 2024 by <a href="https://linkme.bio/ozoriotsn">ozoriotsn</a>
                 </span>

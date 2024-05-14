@@ -19,17 +19,6 @@
     @endif
     @livewireStyles
 
-    <style>
-
-
-        footer {
-            position: fixed;
-            height: 100px;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
-
 </head>
 
 
