@@ -10,6 +10,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class PetController extends Controller
 {
@@ -110,10 +111,14 @@ class PetController extends Controller
         //dd($data);
 
         if ($request->hasFile('photo')) {
+
             $photo = $request->file('photo');
+            $realPath = $photo->getRealPath();
             $photoHashName = $photo->hashName();
-            $photo->move(public_path('image'), $photoHashName);
+            //$photo->move(public_path('image'), $photoHashName);
             $data['photo'] = $photoHashName;
+            $contents = file_get_contents($realPath);
+            Storage::disk('do_spaces')->put('images/pets/' . $photoHashName, $contents, 'public');
         }
 
         $register = Pet::create($data);
@@ -154,10 +159,18 @@ class PetController extends Controller
         $pet = Pet::find($id);
 
         if ($request->hasFile('photo')) {
+
             $photo = $request->file('photo');
+            $realPath = $photo->getRealPath();
             $photoHashName = $photo->hashName();
-            $photo->move(public_path('image'), $photoHashName);
+            //$photo->move(public_path('image'), $photoHashName);
             $data['photo'] = $photoHashName;
+            $contents = file_get_contents($realPath);
+
+            if(isset($pet->photo)){
+                Storage::disk('do_spaces')->delete('images/persons/'.$pet->photo);
+            }
+            Storage::disk('do_spaces')->put('images/pets/' . $photoHashName, $contents, 'public');
         }
         $pet->update($data);
         return redirect()->route('admin.pet.index')->with('success', 'Registro atualizado com sucesso!');
@@ -170,6 +183,9 @@ class PetController extends Controller
         $deletePhoto = public_path('image') . '/' . $data->photo;
         if (file_exists($deletePhoto)) {
             unlink($deletePhoto);
+        }
+        if(isset($data->photo)){
+            Storage::disk('do_spaces')->delete('images/pets/'.$data->photo);
         }
         $data->delete();
         return redirect()->route('admin.pet.index')->with('success', 'Registro excluido com sucesso!');

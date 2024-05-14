@@ -91,7 +91,7 @@
                             <div class="row g-0">
                                 <div class="col-md-2 col-sm-12 text-center">
                                     @if ($item->photo)
-                                        <img src="{{ asset('/') }}image/{{ $item->photo }}" class="img-fluid img-list"
+                                        <img src="https://enchente-rs.nyc3.digitaloceanspaces.com/images/pets/{{ $item->photo }}" class="img-fluid img-list"
                                             alt="">
                                     @else
                                         <img src="https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg"

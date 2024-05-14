@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PersonRequest;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 
 class PersonController extends Controller
@@ -58,9 +59,12 @@ class PersonController extends Controller
 
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
+            $realPath = $photo->getRealPath();
             $photoHashName = $photo->hashName();
-            $photo->move(public_path('image'), $photoHashName);
+            //$photo->move(public_path('image'), $photoHashName);
             $data['photo'] = $photoHashName;
+            $contents = file_get_contents($realPath);
+            Storage::disk('do_spaces')->put('images/persons/' . $photoHashName, $contents, 'public');
         }
 
         $register = Person::create($data);
@@ -93,11 +97,20 @@ class PersonController extends Controller
         $data['active'] = $request->has('active') ? 1 : 0;
 
         $person = Person::find($id);
+
         if ($request->hasFile('photo')) {
+
             $photo = $request->file('photo');
+            $realPath = $photo->getRealPath();
             $photoHashName = $photo->hashName();
-            $photo->move(public_path('image'), $photoHashName);
+            //$photo->move(public_path('image'), $photoHashName);
             $data['photo'] = $photoHashName;
+            $contents = file_get_contents($realPath);
+
+            if(isset($person->photo)){
+                Storage::disk('do_spaces')->delete('images/persons/'.$person->photo);
+            }
+            Storage::disk('do_spaces')->put('images/persons/' . $photoHashName, $contents, 'public');
         }
         $person->update($data);
         return redirect()->route('admin.person.index')->with('success', 'Registro atualizado com sucesso!');
@@ -111,6 +124,11 @@ class PersonController extends Controller
         if (file_exists($deletePhoto)) {
             unlink($deletePhoto);
         }
+
+        if(isset($person->photo)){
+            Storage::disk('do_spaces')->delete('images/persons/'.$person->photo);
+        }
+
         $person->delete();
         return redirect()->route('admin.person.index')->with('success', 'Registro excluido com sucesso!');
     }

@@ -41,8 +41,8 @@
 
 
                 <div class="form-group mt-4">
-                    <label for="email">Telefone do abrigo</label>
-                    <input type="text" name="phone" id="phone"
+                    <label for="tel">Telefone do abrigo</label>
+                    <input type="tel" name="phone" id="phone"
                         class="form-control @error('phone') is-invalid @enderror"
                         value="{{ old('phone') ? old('phone') : $person->phone }}">
                     @error('phone')
@@ -65,7 +65,7 @@
                     <br>
 
                     @if ($person->photo)
-                        <img src="{{ asset('/') }}image/{{ $person->photo }}" width="50" height="50"
+                        <img src="https://enchente-rs.nyc3.digitaloceanspaces.com/images/persons/{{ $person->photo }}" width="50" height="50"
                             alt="">
                     @else
                         <img src="https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg"
@@ -79,15 +79,11 @@
 
                     <label for="city">Cidade de Origem</label>
 
-
                         <select class="form-select @error('city') is-invalid @enderror" aria-label="Default select example" name="city">
-
                             @foreach ($cities as $city)
                                 <option value="{{ $city['name'] }}" {{$person->city == $city['name'] ? 'selected' : ''}} >{{ $city['name'] }}</option>
                             @endforeach
-
                         </select>
-
 
                     @error('city')
                         <span class="invalid-feedback" role="alert">

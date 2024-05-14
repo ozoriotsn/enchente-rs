@@ -112,8 +112,8 @@
 
 
                     <div class="form-group mt-4 ">
-                        <label for="email">Telefone do abrigo whatsapp (opcional)</label>
-                        <input type="text" name="phone" id="phone"
+                        <label for="phone">Telefone do abrigo whatsapp (opcional)</label>
+                        <input type="tel" name="phone" id="phone"
                             class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}">
                         @error('phone')
                             <span class="invalid-feedback" role="alert">

@@ -16,7 +16,7 @@ class PetRequest extends FormRequest
             'description' => 'required|max:255',
             'type' => 'required',
             'color' => 'required',
-            'photo' => 'image|mimes:jpeg,png,jpg|'.Rule::requiredIf(function () {  return request()->method() == 'POST' ;}),
+            'photo' => 'image|mimes:jpeg,png,jpg|max:5120|'.Rule::requiredIf(function () {  return request()->method() == 'POST' ;}),
             //'photo' => 'required_if_declined:photo,null',
             //'photo' => 'required|image',
             'city' => 'required',
@@ -38,6 +38,7 @@ class PetRequest extends FormRequest
             'photo.required_if' => 'O campo imagem é obrigatório',
             'photo.image' => 'O campo imagem deve ser uma imagem',
             'photo.mimes' => 'O campo imagem deve ser uma imagem',
+            'photo.size' => 'O campo imagem deve ter no maximo 5MB',
             'city.required' => 'O campo Cidade e obrigatório',
             'shelter.required' => 'O campo Abrigo e obrigatório',
 
