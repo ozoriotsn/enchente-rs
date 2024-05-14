@@ -76,6 +76,9 @@
                                         @if($item->phone)
                                         <i class="bi bi-whatsapp"></i> Contato do abrigo: <a href="https://wa.me/55{{ $item->phone }}" target="_blank"> {{ $item->phone }}</a>
                                         @endif
+                                        <br>
+
+                                        <i class="fa fa-calendar"></i> Data de Cadastro: {{ date('d/m/Y', strtotime($item->created_at)) }}
 
                                     </p>
 
